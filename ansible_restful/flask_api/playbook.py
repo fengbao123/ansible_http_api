@@ -8,7 +8,8 @@ from flask_restful import reqparse,Resource
 
 from ModelClasses import AnsiblePlaybookModel, AnsibleRequestResultModel
 from ansible_restful.ansible_api import ansible_options
-from ansible_restful.flask_api import app,config,log,swagger,api
+from ansible_restful.flask_api import app,log,swagger,api
+from ansible_restful import parse_config
 
 
 class Playbook(Resource):
@@ -18,7 +19,7 @@ class Playbook(Resource):
     def get_playbook(self,args):
 
         if self.name == 'deploy':
-            playbook = config.get("Default", "playbook_root") + "/" + args['cmd'] + "_" + args['component'] + ".yml"
+            playbook = parse_config.playbook_root + "/" + args['cmd'] + "_" + args['component'] + ".yml"
         else:
             playbook = args['playbook']
         return playbook

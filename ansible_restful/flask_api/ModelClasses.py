@@ -1,5 +1,5 @@
 from flask_restful_swagger import swagger
-from flask_restful import Resource, Api, reqparse, fields, marshal_with
+from flask_restful import fields
 
 
 @swagger.model
@@ -10,39 +10,24 @@ class AnsibleExtraArgsModel:
         }
 
 @swagger.model
-@swagger.nested(
-   module_args=AnsibleExtraArgsModel.__name__,
-   extra_vars=AnsibleExtraArgsModel.__name__
-   )
 class AnsibleCommandModel:
     resource_fields = {
         'hosts': fields.List,
         'module': fields.String,
         'module_args': fields.String,
-        #'module_args': fields.List(fields.Nested(AnsibleExtraArgsModel.resource_fields)),
-        #'extra_vars': fields.List(fields.Nested(AnsibleExtraArgsModel.resource_fields)),
-        #'check': fields.String,
         'forks' : fields.Integer,
-        #'verbose_level': fields.Integer,
         'become': fields.Boolean,
         'become_method': fields.String,
         'become_user': fields.String,
     }
 
 @swagger.model
-@swagger.nested(
-   extra_vars=AnsibleExtraArgsModel.__name__
-   )
 class AnsiblePlaybookModel:
     resource_fields = {
         'hosts': fields.List,
         'playbook': fields.String,
-        #'inventory': fields.String,
         'extra_vars': fields.String,
         'forks' : fields.Integer,
-        #'verbose_level': fields.Integer,
-        #'become': fields.Boolean,
-        #'update_git_repo': fields.Boolean,
     }
 
 @swagger.model
@@ -53,9 +38,6 @@ class AansibleDeployModel:
         'component': fields.String,
         'extra_vars': fields.String,
         'forks' : fields.Integer,
-        #'verbose_level': fields.Integer,
-        #'become': fields.Boolean,
-        #'update_git_repo': fields.Boolean,
     }
 
 @swagger.model
