@@ -11,6 +11,7 @@ from ansible_restful.ansible_api import ansible_options
 from ansible_restful.flask_api import app,log,swagger,api
 from ansible_restful import parse_config
 
+from flask import json
 
 class Playbook(Resource):
     def __init__(self):
@@ -50,8 +51,8 @@ class Playbook(Resource):
             log.error("[%s] the playbook: %s is not exists!" % (self.name, playbook))
             return resp
 
-        # extra_vars类型为str，需要转换成disk
-        extra_vars = json.loads(args['extra_vars'])
+        extra_vars = args['extra_vars']
+
         extra_vars['hosts'] = args['hosts']
 
         runner = ansible_api.run_playbook(playbook, extra_vars,options)

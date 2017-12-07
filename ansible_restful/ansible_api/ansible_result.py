@@ -36,7 +36,7 @@ class ResultsCollector(CallbackBase):
             #self.host_result[name] = result._result
 
             now = time.strftime(self.TIME_FORMAT, time.localtime())
-            self.info[name]= self.info.get(name,"") + self.MSG_FORMAT % dict(now=now,task=task,category='SUCCESS')
+            self.output[name]= self.output.get(name,"") + self.MSG_FORMAT % dict(now=now,task=task,category='SUCCESS')
 
     def v2_runner_on_unreachable(self, result, ignore_errors=False):
         name = result._host.get_name()
@@ -48,7 +48,7 @@ class ResultsCollector(CallbackBase):
 
         #self.host_result[name] = result._result
         now = time.strftime(self.TIME_FORMAT, time.localtime())
-        self.info[name] = self.info.get(name, "") + self.MSG_FORMAT % dict(now=now, task=task, category='UNREACHABLE')
+        self.output[name] = self.output.get(name, "") + self.MSG_FORMAT % dict(now=now, task=task, category='UNREACHABLE')
 
     def v2_runner_on_failed(self, result,   *args, **kwargs):
         name = result._host.get_name()
@@ -60,13 +60,13 @@ class ResultsCollector(CallbackBase):
 
             #self.host_result[name] = result._result
             now = time.strftime(self.TIME_FORMAT, time.localtime())
-            self.info[name] = self.info.get(name, "") + self.MSG_FORMAT % dict(now=now, task=task, category='INGORE')
+            self.output[name] = self.output.get(name, "") + self.MSG_FORMAT % dict(now=now, task=task, category='INGORE')
             self.host_ok.setdefault(name, {})[task] = result._result
 
         else:
             # self.host_failed[name] = result._result
             now = time.strftime(self.TIME_FORMAT, time.localtime())
-            self.info[name] = self.info.get(name, "") + self.MSG_FORMAT % dict(now=now, task=task, category='FAILED')
+            self.output[name] = self.output.get(name, "") + self.MSG_FORMAT % dict(now=now, task=task, category='FAILED')
             self.host_failed.setdefault(name, {})[task] = result._result
 
 
