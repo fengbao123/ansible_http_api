@@ -9,6 +9,7 @@ from ModelClasses import AnsibleCommandModel, AnsibleRequestResultModel
 from ansible_restful.ansible_api import ansible_options
 from ansible_restful.flask_api import api
 from ansible_restful.flask_api import log
+import json
 
 
 class Runner(Resource):
@@ -46,7 +47,8 @@ class Runner(Resource):
         parser.add_argument('become', type=bool, help='run with become', required=False)
         parser.add_argument('become_method', type=str, help='become method', required=False)
         parser.add_argument('become_user', type=str, help='become user', required=False)
-        args = parser.parse_args()
+
+        args = json.loads(parser.parse_args())
 
 
         hosts = args['hosts']

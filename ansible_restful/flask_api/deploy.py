@@ -4,7 +4,7 @@ from flask_restful import reqparse
 
 from ModelClasses import AansibleDeployModel, AnsibleRequestResultModel
 from ansible_restful.flask_api import swagger,api,playbook
-
+import json
 
 class Deploy(playbook.Playbook):
 
@@ -20,7 +20,7 @@ class Deploy(playbook.Playbook):
         parser.add_argument('extra_vars', type=dict, help='extra_vars', required=False)
         parser.add_argument('forks', type=dict, help='extra_vars', required=False)
 
-        args = parser.parse_args()
+        args = json.loads(parser.parse_args())
 
         return args
 

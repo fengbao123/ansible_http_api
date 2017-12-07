@@ -1,6 +1,6 @@
 # _*_ coding:utf-8 _*_
 
-import os
+import os,json
 
 from ansible_restful.ansible_api import ansible_api
 from flask import jsonify
@@ -36,7 +36,7 @@ class Playbook(Resource):
 
     def run_playbook(self):
         # 解析参数
-        args = self.parse_params()
+        args = json.loads(self.parse_params())
 
         options = ansible_options.Options(args)
 
