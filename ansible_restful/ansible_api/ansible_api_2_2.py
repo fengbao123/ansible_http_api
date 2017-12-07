@@ -9,6 +9,7 @@ from ansible.plugins import callback_loader
 from ansible.plugins.callback import CallbackBase
 from ansible.vars import VariableManager
 import os
+from ansible_restful.flask_api import log
 
 from ansible_result import ResultsCollector,AnsibleReturn
 
@@ -89,4 +90,4 @@ def run_playbook(books,extra_vars,options):
         #return callback.host_failed
 
     except Exception as e:
-        print e
+        log.error("playbook run error: %s" % e )

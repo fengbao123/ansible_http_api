@@ -9,7 +9,7 @@ from ansible.executor.task_queue_manager import TaskQueueManager
 from ansible.plugins.callback import CallbackBase
 from ansible.executor.playbook_executor import PlaybookExecutor
 from ansible_result import ResultsCollector,AnsibleReturn
-
+from ansible_restful.flask_api import log
 # 初始化对象
 loader = DataLoader()
 
@@ -81,4 +81,4 @@ def run_playbook(books,extra_vars,options):
         #return callback.host_failed
 
     except Exception as e:
-        print e
+        log.error("playbook run error: %s" % e)
