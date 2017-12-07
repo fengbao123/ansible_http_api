@@ -20,7 +20,7 @@ class Deploy(playbook.Playbook):
         parser.add_argument('extra_vars', type=dict, help='extra_vars', required=False)
         parser.add_argument('forks', type=dict, help='extra_vars', required=False)
 
-        args = json.loads(parser.parse_args())
+        args = parser.parse_args()
 
         return args
 

@@ -36,7 +36,7 @@ class Playbook(Resource):
 
     def run_playbook(self):
         # 解析参数
-        args = json.loads(self.parse_params())
+        args = self.parse_params()
 
         options = ansible_options.Options(args)
 
@@ -50,7 +50,8 @@ class Playbook(Resource):
             log.error("[%s] the playbook: %s is not exists!" % (self.name, playbook))
             return resp
 
-        extra_vars = args['extra_vars']
+        # extra_vars类型为str，需要转换成disk
+        extra_vars = json.loads(args['extra_vars'])
         extra_vars['hosts'] = args['hosts']
 
         runner = ansible_api.run_playbook(playbook, extra_vars,options)

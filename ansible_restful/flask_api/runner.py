@@ -48,8 +48,7 @@ class Runner(Resource):
         parser.add_argument('become_method', type=str, help='become method', required=False)
         parser.add_argument('become_user', type=str, help='become user', required=False)
 
-        args = json.loads(parser.parse_args())
-
+        args = parser.parse_args()
 
         hosts = args['hosts']
 
