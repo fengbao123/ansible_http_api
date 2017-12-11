@@ -31,7 +31,7 @@ class Deploy(playbook.Playbook):
         parameters=[
             {
                 "name": "body",
-                "description": "Inut object: cmd=",
+                "description": "Inut object: cmd和component和hosts为必填参数，extra_vars根据需要传入",
                 "required": True,
                 "allowMultiple": False,
                 "dataType": AansibleDeployModel.__name__,
